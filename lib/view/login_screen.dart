@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                         passwordController.text,
                       );
                       storeToken(token!);
-                      Get.to(const ProductScreen());
+                      Get.off(ProductScreen());
                     },
                     style: ElevatedButton.styleFrom(backgroundColor: kBlack),
                     child: const Text(
