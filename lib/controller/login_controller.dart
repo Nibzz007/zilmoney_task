@@ -4,8 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:zilmoney_task/model/login_model.dart';
 
 class LoginController extends GetxController {
-  RxBool isLoading = false.obs;
-  
+  RxBool isChecked = false.obs;
 
   Future<String?> loginPost(String username,String password) async {
     String baseUrl = "https://fakestoreapi.com/auth/login";

@@ -13,6 +13,13 @@ const kHeight20 = SizedBox(
 const kHeight50 = SizedBox(
   height: 50,
 );
+const kHeight60 = SizedBox(
+  height: 60,
+);
+const kHeight70 = SizedBox(
+  height: 70,
+);
+
 
 // Width
 

@@ -11,37 +11,43 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  @override
-  void initState() {
-    controller.getAllProducts();
-    super.initState();
-  }
-
   final controller = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('All products'),
-        centerTitle: true,
-      ),
-      body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Obx(() => ListView.separated(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage:
-                        NetworkImage(controller.allProductsModel[index].image),
+        appBar: AppBar(
+          title: const Text('All products'),
+          centerTitle: true,
+        ),
+        body: Obx(
+          () => controller.isLoading.value
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: NetworkImage(
+                            controller.allProducts[index].image,
+                          ),
+                        ),
+                        title: Text(controller.allProducts[index].title),
+                        subtitle:
+                            Text(controller.allProducts[index].category.name),
+                        trailing: Text(
+                          '\$ ${controller.allProducts[index].price.toString()}',
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => kHeight10,
+                    itemCount: controller.allProducts.length,
                   ),
-                );
-              },
-              separatorBuilder: (context, index) => kHeight10,
-              itemCount: 10,
-            ),)
-          ),
-    );
+                ),
+        ));
   }
 }

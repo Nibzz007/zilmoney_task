@@ -29,71 +29,77 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Form(
           key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Login',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              kHeight50,
-              const Text('Username'),
-              TextFormFieldWidget(
-                validator: (value) {
-                  if (value!.length < 5) {
-                    return 'Username must be at least 5 characters';
-                  }
-                  return null;
-                },
-                controller: usernameController,
-              ),
-              kHeight20,
-              const Text('Password'),
-              TextFormFieldWidget(
-                validator: (value) {
-                  if (value!.length < 5) {
-                    return 'Password must be at least 5 characters';
-                  }
-                  return null;
-                },
-                obscureText: true,
-                controller: passwordController,
-              ),
-              kHeight20,
-              Row(
-                children: [
-                  Checkbox(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
-                  const Text('Remember password'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (!formKey.currentState!.validate()) {
-                        return;
-                      }
-                      String? token = await controller.loginPost(
-                        usernameController.text,
-                        passwordController.text,
-                      );
-                      storeToken(token!);
-                      Get.off(ProductScreen());
-                    },
-                    style: ElevatedButton.styleFrom(backgroundColor: kBlack),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: kWhite),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                kHeight60,
+                const Text(
+                  'Login',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+                kHeight50,
+                const Text('Username'),
+                TextFormFieldWidget(
+                  validator: (value) {
+                    if (value!.length < 5 && value != null) {
+                      return 'Username must be at least 5 characters';
+                    }
+                    return null;
+                  },
+                  controller: usernameController,
+                ),
+                kHeight20,
+                const Text('Password'),
+                TextFormFieldWidget(
+                  validator: (value) {
+                    if (value!.length < 5 && value != null) {
+                      return 'Password must be at least 5 characters';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
+                  controller: passwordController,
+                ),
+                kHeight20,
+                Row(
+                  children: [
+                    Checkbox(
+                      value: false,
+                      onChanged: (value) {
+                        
+                      },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    const Text('Remember password'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (!formKey.currentState!.validate()) {
+                          return;
+                        }
+                        String? token = await controller.loginPost(
+                          usernameController.text,
+                          passwordController.text,
+                        );
+                        storeToken(token!);
+                        Get.off(ProductScreen());
+                      },
+                      style: ElevatedButton.styleFrom(backgroundColor: kBlack),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: kWhite),
+                      ),
+                    ),
+                  ],
+                ),
+                kHeight70,
+              ],
+            ),
           ),
         ),
       ),
