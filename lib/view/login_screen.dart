@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zilmoney_task/constants/const_color.dart';
 import 'package:zilmoney_task/constants/const_size.dart';
 import 'package:zilmoney_task/controller/login_controller.dart';
@@ -65,11 +64,14 @@ class LoginScreen extends StatelessWidget {
                 kHeight20,
                 Row(
                   children: [
-                    Checkbox(
-                      value: false,
-                      onChanged: (value) {
-                        
-                      },
+                    Obx(
+                      () => Checkbox(
+                        splashRadius: 0,
+                        value: controller.isChecked.value,
+                        onChanged: (click) {
+                          controller.toggleCheckbox();
+                        },
+                      ),
                     ),
                     const Text('Remember password'),
                   ],
@@ -86,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                           usernameController.text,
                           passwordController.text,
                         );
-                        storeToken(token!);
+                        controller.storeToken(token!);
                         Get.off(ProductScreen());
                       },
                       style: ElevatedButton.styleFrom(backgroundColor: kBlack),
@@ -104,10 +106,5 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void storeToken(String token) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', token);
   }
 }
