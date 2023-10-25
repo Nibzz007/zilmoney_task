@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zilmoney_task/view/login_screen.dart';
 import 'package:get/get.dart';
 
-void main(List<String> args) {
+void main() {
   runApp(const MyApp());
 }
 

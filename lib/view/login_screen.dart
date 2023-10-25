@@ -100,6 +100,14 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 kHeight70,
+                Tooltip(
+                  message: 'Please go through the instructions',
+                  showDuration: Duration(seconds: 10),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.question_mark),
+                  ),
+                ),
               ],
             ),
           ),

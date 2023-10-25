@@ -22,12 +22,13 @@ class ProductDetailsScreen extends StatelessWidget {
         backgroundColor: kAmber,
         iconTheme: const IconThemeData(color: kWhite),
       ),
-      body: Column(
-        children: [
-          kHeight10,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Container(
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            kHeight10,
+            Container(
               width: double.infinity,
               height: 300,
               decoration: BoxDecoration(
@@ -39,8 +40,33 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+            kHeight10,
+            Text(
+              product.title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            kHeight5,
+            Row(
+              children: [
+                Text(
+                  product.rating.rate.toString(),
+                ),
+                kWidth5,
+                Text(
+                  "(${product.rating.count})",
+                ),
+              ],
+            ),
+            kHeight20,
+            Text('Description'),
+            kHeight10,
+            Text(product.description)
+          ],
+        ),
       ),
     );
   }
